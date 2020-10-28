@@ -21,11 +21,11 @@ getSolutions(2, 4, 2);
 function showSolutionsMessage(a, b, c) {
     let result = getSolutions(a, b, c);
     console.log(`Вычисляем корни квадратного уравнения ${a}x^2 + ${b}x + ${c}`);
-    console.log(`Значение дискриминанта: ${result.d}`);
-    if (result.d > 0) {
+    console.log(`Значение дискриминанта: ${result.D}`);
+    if (result.D > 0) {
         console.log(`Уравнение имеет 2 корня: X1 = ${result.roots[0]}, X2 = ${result.roots[1]}`)
     }
-    else if (result.d === 0) {
+    else if (result.D === 0) {
         console.log(`Уравнение имеет 1 корень Х1 = ${result.roots}`);
     }
     else {
