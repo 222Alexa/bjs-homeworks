@@ -1,15 +1,6 @@
 //String.prototype.isPalindrome - для задачи №1
 'use strict';
 String.prototype.isPalindrome = function () {
-        /* let len = this.length;
-        
-        for (let i = 0; i < len; i++) {
-            if (this.toUpperCase[i] === this.toUpperCase[len - 1] - i) {
-                return true;
-            }return false;
-            
-            }
-}/*почему это не работает? (жасмин ругается, то свойство length не определяется, то ожидания не оправдываются.*/
         let origin = this.toUpperCase().replace(/\s+/g, '').split('').join('');
         let reversed = origin.split('').reverse().join('');
         if (origin === reversed) return true;
@@ -20,10 +11,10 @@ String.prototype.isPalindrome = function () {
 function getAverageMark(marks) {
     let sum = 0;
     let average = [];
+    if (marks.length === 0) {
+        return 0;
+    }
     for (let i = 0; i < marks.length; i++) {
-        if (marks.length === 0) {
-            return 0;
-        }
         sum += marks[i];
         average = sum / marks.length;
     }
