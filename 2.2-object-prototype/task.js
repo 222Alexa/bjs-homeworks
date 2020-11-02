@@ -16,8 +16,8 @@ function getAverageMark(marks) {
     }
     for (let i = 0; i < marks.length; i++) {
         sum += marks[i];
-        average = sum / marks.length;
     }
+    average = sum / marks.length;
     return Math.round(average);
 }
 // код для задачи №3 писать здесь
