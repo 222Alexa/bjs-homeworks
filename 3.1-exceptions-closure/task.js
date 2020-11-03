@@ -8,12 +8,12 @@ function parseCount(value) {
 
 function validateCount(value) {
     try {
-        parseCount(value);
+        return parseCount(value);
     }
     catch (e) {
         return Error('Невалидное значение');
     }
-    return parseCount(value);
+    
 }
 class Triangle {
     constructor(a, b, c) {
@@ -37,11 +37,9 @@ function getTriangle(a, b, c) {
     }
     catch (e) {
         return {
-            getArea() {
-                return 'Ошибка! Треугольник не существует'
-            }, getPerimeter() {
-                return 'Ошибка! Треугольник не существует'
-            }
+            getArea:() => 
+                `Ошибка! Треугольник не существует`,
+            getPerimeter:(a, b, c) => `Ошибка! Треугольник не существует`
+            };
         }
     }
-}
