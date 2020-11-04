@@ -1,3 +1,4 @@
+'use strict'
 class PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
         this.name = name;
@@ -59,19 +60,22 @@ class Library {
         this.books = [];
     }
     addBook(book) {
-        if (book._state > 30) {
+        if (book.state > 30) {
             this.books.push(book);
             console.log(`Книга ${book.name} добавлена`);
         }
         else console.log(`Книга ${book.name} не может быть добавлена`);
     }
     findBookBy(type, value) {
+        if (!type || !value) {
+            return null;
+        }
         for (let i = 0; i < this.books.length; i++) {
             if (this.books[i][type] === value) {
                 return this.books[i];
             }
-            else return null;
         }
+        return null;
     }
     giveBookByName(bookName) {
         if (!bookName) return null;
@@ -84,42 +88,40 @@ class Library {
 class StudentLog {
     constructor(name) {
         this.name = name;
+        this.subjects = {}
     }
     getName() {
         return this.name
     }
     addGrade(grade, subject) {
-        if (!this[subject]) {
-            this[subject] = [];
+        if (!this.subjects[subject]) {
+            this.subjects[subject] = [];
         }
         if (grade > 0 && grade < 6) {
-            this[subject].push(grade);
+            this.subjects[subject].push(grade);
         }
         else {
             console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.\n${this [subject].length}`);
         }
-        return this[subject].length;
+        return this.subjects[subject].length;
     }
     getAverageBySubject(subject) {
-        if (!(subject in this)) return 0;
+        if (!(subject in this.subjects)) return 0;
         if (!subject) return 0;
-        if (this[subject].length === 0) return 0;
-        let medianeGrade = this[subject].reduce((a, b) => {
+        if (this.subjects[subject].length === 0) return 0;
+        let medianeGrade = this.subjects[subject].reduce((a, b) => {
             return a + b;
-        }, 0) / this[subject].length;
+        }, 0) / this.subjects[subject].length;
         return medianeGrade;
     }
     getTotalAverage() {
-        let sumGrade = 0;
-        let countGrade = 0;
-        for (let key in this) {
-            this[key] = this.getAverageBySubject(this[key]);
-            sumGrade += this[key];
-            countGrade++;
-            if (typeof key == 'number') {
-                return sumGrade / countGrade
-            }
+        let totalGrade = 0;
+        if (Object.keys(this.subjects).length === 0) {
+            return 0
         }
-        return 0;
+        for (let subject in this.subjects) {
+            totalGrade += this.getAverageBySubject(subject);
+        }
+        return totalGrade / Object.keys(this.subjects).length;
     }
 }
