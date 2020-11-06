@@ -18,8 +18,8 @@ function compareArrays(arr1, arr2) {
 }
 
 function memorize(fn, limit) {
+    const memory = [];
     return function (...args) {
-        const memory = [];
         const findResult = memory.find((item) => compareArrays(item.args, args));
         if (findResult) {
             return findResult.result;
@@ -44,12 +44,12 @@ function testCase(testFunction, timer) {
     }
     console.timeEnd(timer);
 }
-console.log(testCase(sum, 'sum'));
+//console.log(testCase(sum, 'sum'));
 // sum: 2526.7021484375 ms
-console.log(testCase(mSum, 'mSum'));
+//console.log(testCase(mSum, 'mSum'));
 //mSum: 302.6708984375 ms
 //без задержки:
-console.log(testCase(sum, 'sum'));
+//console.log(testCase(sum, 'sum'));
 // sum: 2524.97705078125 ms
-console.log(testCase(mSum, 'mSum'));
+//console.log(testCase(mSum, 'mSum'));
 // mSum: 0.09521484375 ms
